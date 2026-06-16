@@ -6,7 +6,6 @@ const navItems = [
   ["home", "Home", "index.html"],
   ["about", "About", "about.html"],
   ["events", "Events", "events.html"],
-  ["membership", "Membership", "membership.html"],
   ["members", "Members", "members.html"],
   ["notices", "Notices", "notices.html"],
   ["resources", "Resources", "resources.html"],
@@ -38,7 +37,7 @@ function renderHeader() {
         <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-nav>
           ${links}
         </nav>
-        <a class="btn btn-orange btn-sm header-cta cta-pulse" href="membership.html#apply">Join the Council</a>
+        <a class="btn btn-orange btn-sm header-cta cta-pulse" href="members.html#apply">Join the Council</a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation" data-menu-toggle>
           <span></span>
         </button>
@@ -62,7 +61,7 @@ function renderFooter() {
           <ul class="footer-links">
             <li><a href="about.html">About the Council</a></li>
             <li><a href="events.html">Events & Programmes</a></li>
-            <li><a href="membership.html">Membership</a></li>
+            <li><a href="members.html#membership">Membership</a></li>
             <li><a href="gallery.html">Gallery</a></li>
           </ul>
         </div>
@@ -230,11 +229,7 @@ function initForms() {
       if (!form.reportValidity()) return;
 
       const data = new FormData(form);
-      const type = form.dataset.emailForm;
-      const subject =
-        type === "membership"
-          ? `Membership enquiry - ${data.get("organisation") || data.get("name")}`
-          : `${data.get("enquiryType") || "Website enquiry"} - ${data.get("name")}`;
+      const subject = `${data.get("enquiryType") || "Website enquiry"} - ${data.get("name")}`;
       const lines = [];
 
       data.forEach((value, key) => {
@@ -264,7 +259,21 @@ function initLightbox() {
 
   const image = lightbox.querySelector("img");
   const caption = lightbox.querySelector("figcaption");
+  const count = lightbox.querySelector(".lightbox-count");
   const closeButton = lightbox.querySelector(".lightbox-close");
+  const previousButton = lightbox.querySelector(".lightbox-prev");
+  const nextButton = lightbox.querySelector(".lightbox-next");
+  let currentIndex = 0;
+
+  const showItem = (index) => {
+    currentIndex = (index + items.length) % items.length;
+    const item = items[currentIndex];
+    const source = item.querySelector("img");
+    image.src = source.src;
+    image.alt = source.alt;
+    caption.textContent = item.dataset.caption || source.alt;
+    if (count) count.textContent = `Photograph ${currentIndex + 1} of ${items.length}`;
+  };
 
   const close = () => {
     lightbox.classList.remove("is-open");
@@ -272,12 +281,9 @@ function initLightbox() {
     document.body.classList.remove("modal-open");
   };
 
-  items.forEach((item) => {
+  items.forEach((item, index) => {
     item.addEventListener("click", () => {
-      const source = item.querySelector("img");
-      image.src = source.src;
-      image.alt = source.alt;
-      caption.textContent = item.dataset.caption || source.alt;
+      showItem(index);
       lightbox.classList.add("is-open");
       lightbox.setAttribute("aria-hidden", "false");
       document.body.classList.add("modal-open");
@@ -286,11 +292,16 @@ function initLightbox() {
   });
 
   closeButton.addEventListener("click", close);
+  if (previousButton) previousButton.addEventListener("click", () => showItem(currentIndex - 1));
+  if (nextButton) nextButton.addEventListener("click", () => showItem(currentIndex + 1));
   lightbox.addEventListener("click", (event) => {
     if (event.target === lightbox) close();
   });
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && lightbox.classList.contains("is-open")) close();
+    if (!lightbox.classList.contains("is-open")) return;
+    if (event.key === "Escape") close();
+    if (event.key === "ArrowLeft") showItem(currentIndex - 1);
+    if (event.key === "ArrowRight") showItem(currentIndex + 1);
   });
 }
 

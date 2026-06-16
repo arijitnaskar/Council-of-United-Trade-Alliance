@@ -7,8 +7,7 @@ A responsive static website for the Council of United Trade Alliance, prepared f
 - `index.html` - Home
 - `about.html` - About the Council
 - `events.html` - Upcoming and past programmes
-- `membership.html` - Membership information and enquiry form
-- `members.html` - Member network and directory placeholder
+- `members.html` - Member network, membership information, and enquiry form
 - `notices.html` - Official notice area
 - `resources.html` - Important official links
 - `gallery.html` - Image gallery with lightbox
@@ -27,9 +26,9 @@ A responsive static website for the Council of United Trade Alliance, prepared f
 
 All links are relative, so the site works on both user/organization pages and repository project pages.
 
-## Static forms
+## Static form and membership download
 
-The contact and membership forms prepare a pre-filled email to `unitedtradealliance@gmail.com`. This avoids requiring a backend on GitHub Pages. Replace this behavior with a verified form service or server endpoint if direct submissions are required.
+The contact form prepares a pre-filled email to `unitedtradealliance@gmail.com`. Membership applicants download the official Word form from `assets/downloads/Membership Form.docx` and submit it to the Council Secretariat.
 
 ## Content still required before launch
 
