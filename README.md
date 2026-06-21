@@ -7,7 +7,7 @@ A responsive static website for the Council of United Trade Alliance, prepared f
 - `index.html` - Home
 - `about.html` - About the Council
 - `events.html` - Upcoming and past programmes
-- `members.html` - Member network, membership information, and enquiry form
+- `members.html` - News page with member network and membership information
 - `notices.html` - Official notice area
 - `resources.html` - Important official links
 - `gallery.html` - Image gallery with lightbox

@@ -6,7 +6,7 @@ const navItems = [
   ["home", "Home", "index.html"],
   ["about", "About", "about.html"],
   ["events", "Events", "events.html"],
-  ["members", "Members", "members.html"],
+  ["news", "News", "members.html"],
   ["notices", "Notices", "notices.html"],
   ["resources", "Resources", "resources.html"],
   ["gallery", "Gallery", "gallery.html"],
@@ -32,7 +32,8 @@ function renderHeader() {
     <header class="site-header" data-header>
       <div class="header-inner">
         <a class="brand" href="index.html" aria-label="Council of United Trade Alliance home">
-          <img src="assets/images/cuta-logo-horizontal.png" alt="Council of United Trade Alliance">
+          <img class="brand-mark" src="assets/images/cuta-logo-mark.png" alt="" aria-hidden="true">
+          <span class="brand-name">Council of United<br>Trade Alliance</span>
         </a>
         <nav class="site-nav" id="site-navigation" aria-label="Primary navigation" data-nav>
           ${links}
@@ -55,6 +56,17 @@ function renderFooter() {
         <div class="footer-brand">
           <img src="assets/images/cuta-logo-stacked.png" alt="Council of United Trade Alliance">
           <p>A collective platform advancing practical awareness, representation, networking, and enterprise development for MSMEs in West Bengal.</p>
+          <div class="social-links" aria-label="Social media links">
+            <a class="social-link" href="https://www.youtube.com/channel/UCU0GlY9O9K4SxSrDGrdlUVQ" target="_blank" rel="noopener noreferrer" aria-label="Visit CUTA on YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21.58 7.19a2.75 2.75 0 0 0-1.94-1.95C17.92 4.78 12 4.78 12 4.78s-5.92 0-7.64.46a2.75 2.75 0 0 0-1.94 1.95A28.8 28.8 0 0 0 2 12a28.8 28.8 0 0 0 .42 4.81 2.75 2.75 0 0 0 1.94 1.95c1.72.46 7.64.46 7.64.46s5.92 0 7.64-.46a2.75 2.75 0 0 0 1.94-1.95A28.8 28.8 0 0 0 22 12a28.8 28.8 0 0 0-.42-4.81ZM10 15.27V8.73L15.66 12 10 15.27Z"/></svg>
+            </a>
+            <span class="social-link social-link-disabled" role="img" aria-label="Facebook link coming soon">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 8.55V7.2c0-.65.15-1.08 1.03-1.08h1.63V3.35A21.9 21.9 0 0 0 14.28 3c-2.36 0-3.98 1.44-3.98 4.08v1.47H7.63v3.1h2.67V21h3.28v-9.35h2.55l.4-3.1H14Z"/></svg>
+            </span>
+            <span class="social-link social-link-disabled" role="img" aria-label="Twitter link coming soon">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.92 3h3.08l-6.72 7.68L22.18 21h-6.19l-4.84-6.33L5.61 21H2.52l7.19-8.22L2.14 3h6.34l4.38 5.79L17.92 3Zm-1.08 16.18h1.7L7.55 4.72H5.72l11.12 14.46Z"/></svg>
+            </span>
+          </div>
         </div>
         <div>
           <h3>Explore</h3>
@@ -66,9 +78,9 @@ function renderFooter() {
           </ul>
         </div>
         <div>
-          <h3>Member Desk</h3>
+          <h3>News Desk</h3>
           <ul class="footer-links">
-            <li><a href="members.html">Members</a></li>
+            <li><a href="members.html">News</a></li>
             <li><a href="notices.html">Notices</a></li>
             <li><a href="resources.html">Important Links</a></li>
             <li><a href="contact.html">Contact Secretariat</a></li>
