@@ -28,7 +28,7 @@ All links are relative, so the site works on both user/organization pages and re
 
 ## Static form and membership download
 
-The contact form prepares a pre-filled email to `unitedtradealliance@gmail.com`. Membership applicants download the official Word form from `assets/downloads/Membership Form.docx` and submit it to the Council Secretariat.
+The contact form prepares a pre-filled email to `unitedtradeallince@gmail.com`. Membership applicants download the official Word form from `assets/downloads/Membership Form.docx` and submit it to the Council Secretariat.
 
 ## Content still required before launch
 

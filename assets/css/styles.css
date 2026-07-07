@@ -1177,6 +1177,10 @@ ol:last-child {
   box-shadow: var(--shadow-lg);
 }
 
+.news-card + .news-card {
+  margin-top: 26px;
+}
+
 .news-card::before {
   position: absolute;
   top: 0;

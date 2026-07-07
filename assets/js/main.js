@@ -89,7 +89,7 @@ function renderFooter() {
         <div>
           <h3>Contact</h3>
           <ul class="footer-links">
-            <li><a href="mailto:unitedtradealliance@gmail.com">unitedtradealliance@gmail.com</a></li>
+            <li><a href="mailto:unitedtradeallince@gmail.com">unitedtradeallince@gmail.com</a></li>
             <li><a href="tel:+919903304633">+91 99033 04633</a></li>
             <li><a href="tel:+918017007817">+91 80170 07817</a></li>
             <li>Purbapara, P.O. Madarat, Baruipur, South 24 Parganas, West Bengal - 743610</li>
@@ -251,7 +251,7 @@ function initForms() {
         }
       });
 
-      const mailto = `mailto:unitedtradealliance@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+      const mailto = `mailto:unitedtradeallince@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
         lines.join("\n"),
       )}`;
       const status = form.querySelector(".form-status");
