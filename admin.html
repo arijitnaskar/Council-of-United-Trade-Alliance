@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Council of United Trade Alliance gallery administration page.">
+  <meta name="theme-color" content="#062b51">
+  <title>Gallery Admin | Council of United Trade Alliance</title>
+  <link rel="icon" href="assets/images/cuta-logo-mark.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script src="assets/js/main.js?v=20260724" defer></script>
+  <script src="assets/js/admin.js?v=20260724" defer></script>
+</head>
+<body data-page="admin">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="site-loader" aria-label="Loading website"><div class="loader-inner"><img class="loader-mark" src="assets/images/cuta-logo-mark.png" alt=""><div class="loader-line"></div></div></div>
+  <div data-site-header></div>
+
+  <main id="main-content">
+    <section class="page-hero admin-hero">
+      <div class="container">
+        <div class="breadcrumb"><a href="index.html">Home</a><span>Gallery Admin</span></div>
+        <span class="gallery-hero-label">Private publishing tool</span>
+        <h1>Upload gallery photographs to GitHub.</h1>
+        <p>This page helps an authorised admin upload a photo and description to the GitHub repository. After GitHub Pages republishes, the item appears on the Gallery page.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container admin-layout">
+        <aside class="admin-help-card reveal">
+          <span class="eyebrow">Before uploading</span>
+          <h2>Use a limited GitHub token.</h2>
+          <p>The website is static, so it cannot safely store a password. Paste a fine-grained GitHub token only when uploading; it stays in this browser session and is never written into the site files.</p>
+          <ul class="check-list">
+            <li>Create a fine-grained token for this repository only.</li>
+            <li>Give it <strong>Contents: Read and write</strong> permission.</li>
+            <li>Keep the expiry short and revoke it if it is no longer needed.</li>
+          </ul>
+          <a class="text-link" href="gallery.html">View Gallery</a>
+        </aside>
+
+        <form class="admin-card reveal" data-admin-gallery-form>
+          <div class="section-heading compact">
+            <span class="eyebrow">New gallery item</span>
+            <h2>Photo details</h2>
+            <p>Fill the details, choose the photo, then publish directly to GitHub.</p>
+          </div>
+
+          <div class="admin-field-grid">
+            <label class="field">
+              <span>GitHub Token</span>
+              <input type="password" name="token" autocomplete="off" placeholder="Paste token for this upload" required>
+            </label>
+            <label class="field">
+              <span>Branch</span>
+              <input type="text" name="branch" value="main" required>
+            </label>
+            <label class="field">
+              <span>Repository Owner</span>
+              <input type="text" name="owner" value="arijitnaskar" required>
+            </label>
+            <label class="field">
+              <span>Repository Name</span>
+              <input type="text" name="repo" value="Council-of-United-Trade-Alliance" required>
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Event Heading</span>
+            <input type="text" name="eventTitle" placeholder="Example: Discussion on Rural MSME Development" required>
+          </label>
+
+          <div class="admin-field-grid">
+            <label class="field">
+              <span>Photo Title</span>
+              <input type="text" name="title" placeholder="Example: Rural MSME Dialogue" required>
+            </label>
+            <label class="field">
+              <span>Event Date</span>
+              <input type="date" name="eventDate">
+            </label>
+            <label class="field">
+              <span>Location</span>
+              <input type="text" name="location" placeholder="Example: Kolkata">
+            </label>
+            <label class="field">
+              <span>Category</span>
+              <input type="text" name="category" placeholder="Example: MSME representation">
+            </label>
+          </div>
+
+          <label class="field">
+            <span>Description</span>
+            <textarea name="description" rows="6" placeholder="Write the gallery description visitors should see." required></textarea>
+          </label>
+
+          <label class="field admin-file-field">
+            <span>Photo</span>
+            <input type="file" name="image" accept="image/jpeg,image/png,image/webp" required>
+          </label>
+
+          <div class="admin-preview" data-admin-preview hidden>
+            <img src="" alt="">
+            <div>
+              <strong data-preview-title></strong>
+              <span data-preview-meta></span>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button class="btn btn-orange cta-pulse" type="submit" data-admin-submit>Upload Image &amp; Publish</button>
+            <button class="btn btn-light" type="reset">Clear Form</button>
+          </div>
+
+          <p class="form-status admin-status" data-admin-status aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <div data-site-footer></div>
+</body>
+</html>

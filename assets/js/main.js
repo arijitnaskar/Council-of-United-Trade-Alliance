@@ -15,6 +15,18 @@ const navItems = [
 
 const icon = (symbol) => `<span aria-hidden="true">${symbol}</span>`;
 
+const escapeHTML = (value) =>
+  String(value || "").replace(/[&<>"']/g, (character) => {
+    const entities = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
+    };
+    return entities[character];
+  });
+
 function renderHeader() {
   const mount = document.querySelector("[data-site-header]");
   if (!mount) return;
@@ -264,10 +276,57 @@ function initForms() {
   });
 }
 
+function initDynamicGallery() {
+  const section = document.querySelector("[data-gallery-dynamic]");
+  const mount = document.querySelector("[data-gallery-items]");
+  if (!section || !mount) return;
+
+  fetch(`assets/data/gallery.json?v=${Date.now()}`, { cache: "no-store" })
+    .then((response) => {
+      if (!response.ok) throw new Error("Gallery data not available");
+      return response.json();
+    })
+    .then((data) => {
+      const items = Array.isArray(data.items) ? data.items.filter((item) => item && item.image) : [];
+      if (!items.length) return;
+
+      mount.innerHTML = items
+        .map((item) => {
+          const title = escapeHTML(item.title || "Council photograph");
+          const description = escapeHTML(item.description || "");
+          const eventTitle = escapeHTML(item.eventTitle || "Council update");
+          const location = escapeHTML(item.location || "");
+          const eventDate = escapeHTML(item.eventDate || "");
+          const image = escapeHTML(item.image);
+          const alt = escapeHTML(item.alt || `${title} - ${eventTitle}`);
+          const caption = escapeHTML(description || `${title} - ${eventTitle}`);
+          const layoutMap = {
+            tall: " event-photo-tall",
+            panorama: " event-photo-panorama",
+            wide: " event-photo-wide",
+          };
+          const layoutClass = layoutMap[item.layout] || "";
+          const subtitle = [eventTitle, eventDate, location].filter(Boolean).join(" | ");
+
+          return `
+            <button class="event-photo${layoutClass} reveal" type="button" data-lightbox data-caption="${caption}">
+              <img src="${image}" alt="${alt}" loading="lazy">
+              <span class="event-photo-caption"><strong>${title}</strong><span>${escapeHTML(subtitle)}</span></span>
+            </button>`;
+        })
+        .join("");
+
+      section.hidden = false;
+      initReveal();
+    })
+    .catch((error) => {
+      console.info(error.message);
+    });
+}
+
 function initLightbox() {
-  const items = document.querySelectorAll("[data-lightbox]");
   const lightbox = document.querySelector(".lightbox");
-  if (!items.length || !lightbox) return;
+  if (!lightbox || lightbox.dataset.lightboxReady === "true") return;
 
   const image = lightbox.querySelector("img");
   const caption = lightbox.querySelector("figcaption");
@@ -275,12 +334,21 @@ function initLightbox() {
   const closeButton = lightbox.querySelector(".lightbox-close");
   const previousButton = lightbox.querySelector(".lightbox-prev");
   const nextButton = lightbox.querySelector(".lightbox-next");
+  if (!image || !caption || !closeButton) return;
+
+  lightbox.dataset.lightboxReady = "true";
+  let items = [];
   let currentIndex = 0;
 
+  const getItems = () => Array.from(document.querySelectorAll("[data-lightbox]"));
+
   const showItem = (index) => {
+    items = getItems();
+    if (!items.length) return;
     currentIndex = (index + items.length) % items.length;
     const item = items[currentIndex];
     const source = item.querySelector("img");
+    if (!source) return;
     image.src = source.src;
     image.alt = source.alt;
     caption.textContent = item.dataset.caption || source.alt;
@@ -293,14 +361,20 @@ function initLightbox() {
     document.body.classList.remove("modal-open");
   };
 
-  items.forEach((item, index) => {
-    item.addEventListener("click", () => {
-      showItem(index);
-      lightbox.classList.add("is-open");
-      lightbox.setAttribute("aria-hidden", "false");
-      document.body.classList.add("modal-open");
-      closeButton.focus();
-    });
+  document.addEventListener("click", (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    const item = target ? target.closest("[data-lightbox]") : null;
+    if (!item) return;
+
+    items = getItems();
+    const index = items.indexOf(item);
+    if (index === -1) return;
+
+    showItem(index);
+    lightbox.classList.add("is-open");
+    lightbox.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+    closeButton.focus();
   });
 
   closeButton.addEventListener("click", close);
@@ -334,5 +408,6 @@ initReveal();
 initTabs();
 initFilters();
 initForms();
+initDynamicGallery();
 initLightbox();
 initPrintButtons();

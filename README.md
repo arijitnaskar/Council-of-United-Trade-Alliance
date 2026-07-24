@@ -11,10 +11,13 @@ A responsive static website for the Council of United Trade Alliance, prepared f
 - `notices.html` - Official notice area
 - `resources.html` - Important official links
 - `gallery.html` - Image gallery with lightbox
+- `admin.html` - Private gallery upload helper for authorised admins
 - `contact.html` - Contact information and enquiry form
 - `privacy.html`, `terms.html` - Draft legal pages
 - `assets/css/styles.css` - Shared responsive design system
 - `assets/js/main.js` - Shared navigation, loader, forms, tabs, filters, and gallery behavior
+- `assets/js/admin.js` - GitHub Pages gallery upload helper
+- `assets/data/gallery.json` - Data source for admin-uploaded gallery items
 - `assets/images/` - Logo and local image assets
 
 ## GitHub Pages
@@ -25,6 +28,12 @@ A responsive static website for the Council of United Trade Alliance, prepared f
 4. Select the publishing branch and the `/ (root)` folder.
 
 All links are relative, so the site works on both user/organization pages and repository project pages.
+
+## Gallery admin uploads
+
+Open `admin.html` directly after deployment. The page can upload a photo to `assets/images/gallery/` and add its description to `assets/data/gallery.json` through the GitHub API.
+
+Use a fine-grained GitHub token limited to this repository, with **Contents: Read and write** permission. Do not hard-code the token in any website file.
 
 ## Static form and membership download
 
